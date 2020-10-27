@@ -24,9 +24,9 @@ ui <- fluidPage(
                 tabPanel("MAF", 
                     plotOutput("maf", height = "800px")
                 ),
-                tabPanel("misc", 
+                tabPanel("yield", 
                     tableOutput("summary"),
-                    plotOutput("misc", height = "800px")
+                    plotOutput("yield", height = "800px")
                 ),
                 tabPanel("hint", 
                     includeMarkdown("hint.md")
@@ -91,7 +91,7 @@ server <- function(input, output) {
                    "Yield(%)" = called_datapoint/all_datapoint, 
                    check.names = FALSE)
     })
-    output$misc <- renderPlot({
+    output$yield <- renderPlot({
         vcf <- readFile()
         gt <- geno(vcf)$GT
         ratio_marker <- apply(gt, 1, function(x)  sum(x != "./.") / length(x) )
