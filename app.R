@@ -77,6 +77,7 @@ server <- function(input, output) {
         )
         d <- data.frame(marker = rownames(vcf), MAF = unlist(info$MAF))
         ggplot(d, aes(x = marker, y = MAF)) +
+            geom_point() +
             theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
     })
     
@@ -100,6 +101,7 @@ server <- function(input, output) {
         fraction_no_missing <- c(ratio_marker, ratio_sample)
         d <- data.frame(type = type, name = name, yield = fraction_no_missing)
         ggplot(d, aes(name, yield)) +
+            geom_point() +
             facet_wrap(vars(type), ncol = 1, scales = "free_x") +
             geom_hline(aes(yintercept = mean(yield))) +
             ylim(0, 1) +
